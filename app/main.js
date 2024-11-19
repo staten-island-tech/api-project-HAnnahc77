@@ -7,11 +7,14 @@ async function getData() {
       throw new Error(response);
     } else {
       const data = await response.json();
-      console.log(data.data);
+      console.log(data);
     }
   } catch (error) {
-    alert("hey i cant find that");
+    alert("Cannot find all data.");
   }
 }
 
+function createCards() {}
+
 getData();
+createCards();
