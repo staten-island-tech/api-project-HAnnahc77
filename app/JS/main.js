@@ -1,8 +1,8 @@
-import "./style.css";
+import "../CSS/style.css";
 
 const URL = "https://api.disneyapi.dev/character";
 
-async function getData(URL) {
+async function getData(URL){
   try {
     const response = await fetch(URL);
     if (response.status !== 200) {
