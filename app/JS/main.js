@@ -3,29 +3,13 @@ import "../CSS/tailwind.css";
 import { DOMSelectors } from "./selectors.js";
 
 const URL = "https://api.disneyapi.dev/character";
+let currentPage = 1;
 
-async function getData(URL) {
+async function getData(page) {
   try {
-    const response = await fetch(URL);
+    const response = await fetch(`${URL}?page=${page}`);
     if (response.status !== 200) {
-      throw new Error(response);
-    } else {
-      const data = await response.json();
-      console.log(data);
-      data.data.forEach((character) => {
-        insertCards(character);
-      });
-    }
-  } catch (error) {
-    alert("Unable to find all information.");
-  }
-}
-
-async function getDataForNextPage(URL) {
-  try {
-    const response = await fetch(URL);
-    if (response.status !== 200) {
-      throw new Error(response);
+      throw new Error("Failed to fetch data");
     } else {
       const data = await response.json();
       console.log(data);
@@ -50,11 +34,22 @@ function insertCards(character) {
   );
 }
 
-function changePage() {
-  DOMSelectors.button.addEventListener("click", function () {});
+function increasePageCount() {
+  DOMSelectors.button2.addEventListener("click", function () {
+    currentPage++;
+    DOMSelectors.container.innerHTML = "";
+    getData(currentPage);
+  });
 }
 
-getData(URL);
-insertCards(character);
-getDataForNextPage(URL);
-changePage();
+function decreasePageCount() {
+  DOMSelectors.button1.addEventListener("click", function () {
+    currentPage--;
+    DOMSelectors.container.innerHTML = "";
+    getData(currentPage);
+  });
+}
+
+getData(currentPage);
+increasePageCount();
+decreasePageCount();
