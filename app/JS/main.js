@@ -1,5 +1,4 @@
-import "../CSS/style.css";
-import "../CSS/tailwind.css";
+import "/tailwind.css";
 import { DOMSelectors } from "./selectors.js";
 
 const URL = "https://api.disneyapi.dev/character";
@@ -25,12 +24,10 @@ async function getData(page) {
 function insertCards(character) {
   DOMSelectors.container.insertAdjacentHTML(
     "beforeend",
-    `
-      <div class="character-card">
+    `<div class="character-card border-[5px] border-black p-4">
         <h2>${character.name}</h2>
         <img src="${character.imageUrl}" alt="Image of ${character.name}" />
-      </div>
-    `
+      </div>`
   );
 }
 
