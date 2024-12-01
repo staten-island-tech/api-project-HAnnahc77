@@ -40,8 +40,8 @@ async function getNextPage(page) {
 function insertCards(character) {
   DOMSelectors.container.insertAdjacentHTML(
     "beforeend",
-    `<div class="characterCard border-2 border-black">
-        <h2>${character.name}</h2>
+    `<div class="characterCard border-2 border-[#2d6d71]">
+        <h2 class="text-[20px]">${character.name}</h2>
         <img src="${character.imageUrl}" alt="Image of ${character.name}" />
       </div>`
   );
