@@ -8,7 +8,7 @@ async function getFirstPage() {
   try {
     const response = await fetch(`${URL}`);
     if (response.status !== 200) {
-      throw new Error("Failed to fetch data for the first page.");
+      throw new Error(response);
     }
     const data = await response.json();
     data.data.forEach((character) => {
@@ -23,7 +23,7 @@ async function getNextPage(page) {
   try {
     const response = await fetch(`${URL}?page=${page}`);
     if (response.status !== 200) {
-      throw new Error("Failed to fetch data for the selected page");
+      throw new Error(response);
     }
     const data = await response.json();
     data.data.forEach((character) => {
@@ -37,9 +37,12 @@ async function getNextPage(page) {
 function insertCards(character) {
   DOMSelectors.container.insertAdjacentHTML(
     "beforeend",
-    `<div class="border-2 border-[#2d6d71]">
+    `<div class="p-[5px] w-80 border-2 border-[#2d6d71]">
         <h2 class="text-[20px]">${character.name}</h2>
-        <img src="${character.imageUrl}" alt="Image of ${character.name}" />
+        <div class="flex justify-center">
+          <img class="w-64 h-80 object-cover" src="${character.imageUrl}" alt="Image of ${character.name}" onerror="this.onerror=null;this.src='https://hips.hearstapps.com/hmg-prod/images/legacy-fre-image-placeholder-1649876370.png?crop=1.00xw:0.501xh;0,0.239xh&resize=980:*';" />
+        </div>
+        <p class="text-[10px]">${character.tvShows}${character.films}</p>
       </div>`
   );
 }
