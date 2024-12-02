@@ -42,7 +42,7 @@ function insertCards(character) {
         <div class="flex justify-center">
           <img class="w-64 h-80 object-cover" src="${character.imageUrl}" alt="Image of ${character.name}" onerror="this.onerror=null;this.src='https://hips.hearstapps.com/hmg-prod/images/legacy-fre-image-placeholder-1649876370.png?crop=1.00xw:0.501xh;0,0.239xh&resize=980:*';" />
         </div>
-        <p class="text-[10px]">${character.tvShows}${character.films}</p>
+        <p class="text-[14px]">${character.tvShows}${character.films}</p>
       </div>`
   );
 }
