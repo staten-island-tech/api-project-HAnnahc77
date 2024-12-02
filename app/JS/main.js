@@ -2,14 +2,13 @@ import "/tailwind.css";
 import { DOMSelectors } from "./selectors.js";
 
 const URL = "https://api.disneyapi.dev/character";
-let currentPage = 1;
-
+let currentPage = 10;
 
 async function getFirstPage() {
   try {
-    const response = await fetch(`${URL}?page=1`);
+    const response = await fetch(`${URL}`);
     if (response.status !== 200) {
-      throw new Error("Failed to fetch first page data");
+      throw new Error("Failed to fetch data for the first page.");
     }
     const data = await response.json();
     data.data.forEach((character) => {
@@ -19,7 +18,6 @@ async function getFirstPage() {
     alert("Unable to fetch the first page.");
   }
 }
-
 
 async function getNextPage(page) {
   try {
@@ -36,22 +34,20 @@ async function getNextPage(page) {
   }
 }
 
-
 function insertCards(character) {
   DOMSelectors.container.insertAdjacentHTML(
     "beforeend",
-    `<div class="characterCard border-2 border-[#2d6d71]">
+    `<div class="border-2 border-[#2d6d71]">
         <h2 class="text-[20px]">${character.name}</h2>
         <img src="${character.imageUrl}" alt="Image of ${character.name}" />
       </div>`
   );
 }
 
-
 function increasePageCount() {
   DOMSelectors.button2.addEventListener("click", function () {
     currentPage++;
-    DOMSelectors.container.innerHTML = ""; 
+    DOMSelectors.container.innerHTML = "";
     getNextPage(currentPage);
   });
 }
@@ -60,10 +56,9 @@ function decreasePageCount() {
   DOMSelectors.button1.addEventListener("click", function () {
     currentPage--;
     DOMSelectors.container.innerHTML = "";
-    getNextPage(currentPage); 
+    getNextPage(currentPage);
   });
 }
-
 
 getFirstPage();
 increasePageCount();
